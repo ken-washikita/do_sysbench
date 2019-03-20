@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. ./test_cond
+
+echo "drop database $DBNAME;" | mysql -h $DBHOST -u root -p$DBPASS
+echo "create database $DBNAME;" | mysql -h $DBHOST -u root -p$DBPASS
+
+sysbench \
+  --db-driver=mysql \
+  --mysql-host=$DBHOST \
+  --mysql-db=$DBNAME \
+  --mysql-user=$DBUSER \
+  --mysql-password=$DBPASS \
+  --tables=$NUM_TABLES \
+  --table_size=$TABLE_SIZE \
+  oltp_read_write \
+  prepare
