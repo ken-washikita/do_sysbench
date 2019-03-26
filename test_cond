@@ -3,6 +3,6 @@ DBNAME=sysbench
 DBUSER=root
 DBPASS=`awk -F '=' '/password/ { print $2 }' /root/.my.cnf | sed 's/"//g'`
 
-MAX_TIME=900
+MAX_TIME=300
 NUM_TABLES=50
 TABLE_SIZE=100000

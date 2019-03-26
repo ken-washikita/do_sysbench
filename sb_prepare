@@ -6,12 +6,12 @@ echo "drop database $DBNAME;" | mysql -h $DBHOST -u root -p$DBPASS
 echo "create database $DBNAME;" | mysql -h $DBHOST -u root -p$DBPASS
 
 sysbench \
+  --test=/usr/local/share/sysbench/oltp.lua \
   --db-driver=mysql \
   --mysql-host=$DBHOST \
   --mysql-db=$DBNAME \
   --mysql-user=$DBUSER \
   --mysql-password=$DBPASS \
-  --tables=$NUM_TABLES \
-  --table_size=$TABLE_SIZE \
-  oltp_read_write \
+  --oltp-tables-count=$NUM_TABLES \
+  --oltp-table-size=$TABLE_SIZE \
   prepare

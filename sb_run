@@ -11,17 +11,18 @@ mkdir -p $LOGDIR
 function do_sysbench ()
 {
 	sysbench \
+	  --test=/usr/local/share/sysbench/oltp.lua \
 	  --db-driver=mysql \
 	  --mysql-host=$DBHOST \
 	  --mysql-db=$DBNAME \
 	  --mysql-user=$DBUSER \
 	  --mysql-password=$DBPASS \
-	  --threads=$1 \
-	  --time=$2 \
-	  --tables=$NUM_TABLES \
-	  --table_size=$TABLE_SIZE \
-	  --report-interval=1 \
-	  oltp_read_write \
+	  --num-threads=$1 \
+	  --max-time=$2 \
+	  --max-requests=0 \
+	  --oltp-tables-count=$NUM_TABLES \
+	  --oltp-table-size=$TABLE_SIZE \
+	  --oltp-test-mode=complex \
 	  run
 }
 
